@@ -18,7 +18,8 @@ class PostController extends Controller
     }
     public function store(StoreUpdatePost $request){
         Post::create($request->all());
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')
+                         ->with('message', 'Post criado com sucesso');
     }
      public function show($id){
       $post = Post::where('id', $id)->first();
@@ -35,8 +36,8 @@ class PostController extends Controller
          if(!$posts = Post::find($id)){
              return redirect()->route('posts.index');
          }
+         dd('caindo aqui');
              $posts->delete();
-
              return redirect()
                             ->route('posts.index')
                             ->with('message', 'Post apagado com sucesso');
